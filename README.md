@@ -8,6 +8,8 @@
 
 ## USAGE:
 
+</div>
+
 ```cpp
 
 #include "OhMyConsole/OhMyConsole.hpp"
