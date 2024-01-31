@@ -7,7 +7,18 @@ class OhMyConfiguation
 private:
 	std::string project_name = "";
 	bool update_time_on_print = false;
+	bool silent_start = false;
 public:
+
+	void enable_silent_start()
+	{
+		silent_start = true;
+	}
+
+	bool get_silent_start_status()
+	{
+		return silent_start;
+	}
 
 	void set_project_name(const char* value)
 	{

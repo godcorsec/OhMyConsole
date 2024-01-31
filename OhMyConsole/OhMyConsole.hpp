@@ -147,11 +147,17 @@ public:
 
     void init()
     {
-        Timer* timer = new Timer();
-        CustomMessages* messages = new CustomMessages();
+        CreateConsole();
         
-        print_ok("Started", config.get_project_name().empty() ? "Instance" : config.get_project_name()); // if project_name() is empty, print "Started Instance" instead of empty: "Started <empty>"
-        NewConsoleTitle("Running Since: [ %FTT ],  %FSR");
+        if (!config.get_silent_start_status())
+        {
+            Timer* timer = new Timer();
+            timer->start();
+            print_ok("Started", config.get_project_name().empty() ? "Instance" : config.get_project_name()); // if project_name() is empty, print "Started Instance" instead of empty: "Started <empty>"
+            print_ok("Configuration Loaded");
+            timer->end();
+            print_ok("Finished In: ", timer->elapsed_to_str());
+        }
     }
 
 private:
