@@ -35,6 +35,7 @@ public:
 		COLOR_PROPERTIES::START_OFFSET_COLOR = value;
 	}
 
+
 	int get_colour_start_rotation()
 	{
 		return COLOR_PROPERTIES::START_OFFSET_COLOR;

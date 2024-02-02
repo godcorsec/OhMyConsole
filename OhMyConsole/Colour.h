@@ -6,12 +6,17 @@
 
 namespace COLOR_PROPERTIES
 {
-    int START_OFFSET_COLOR = 165;
+    static int START_OFFSET_COLOR = 0;  // Change this line
     int COLOR_OFFSET = 5;
     float LAST_COLOR = START_OFFSET_COLOR;
     float HUE = LAST_COLOR;
     float SATURATION = 1.0f;
     float VALUE = 1.0f;
+}
+
+void set_config_vals_ext()
+{
+    COLOR_PROPERTIES::LAST_COLOR = COLOR_PROPERTIES::START_OFFSET_COLOR;
 }
 
 
@@ -23,10 +28,11 @@ const char* Yellow = "\x1b[38;2;196;193;12m";
 
 void NextColor()
 {
-    COLOR_PROPERTIES::LAST_COLOR += COLOR_PROPERTIES::COLOR_OFFSET;
+    COLOR_PROPERTIES::LAST_COLOR = COLOR_PROPERTIES::LAST_COLOR + COLOR_PROPERTIES::COLOR_OFFSET;
     if (COLOR_PROPERTIES::LAST_COLOR > 360)
         COLOR_PROPERTIES::LAST_COLOR -= 360;
 }
+
 
 struct RGB {
     int R;

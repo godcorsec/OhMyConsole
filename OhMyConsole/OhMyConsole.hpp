@@ -147,6 +147,7 @@ public:
 
     void init()
     {
+        set_config_vals_ext();
         CreateConsole();
         
         if (!config.get_silent_start_status())
