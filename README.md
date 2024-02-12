@@ -35,7 +35,7 @@ int main()
 
     timer->start();
     timer->stop();
-    timer->pause_for()         // this will pause the current thread for [int] ms.
+    timer->pause_for([int] milliseconds)         // this will pause the current thread for [int] ms.
     timer->elapsed();          // returns the elapsed time, only if `end()` was called.
     timer->elapsed_to_str()    // returns the elapsed time as a [string]
     
