@@ -3,7 +3,7 @@
 ## OhMyConsole
 
 * A C++ Header-Based "Library" Thrown Together For Quick Projects.
-* Please Note That OhMyConsole, Is In No-Way Optimized For "High-Performance", Or Anything Like That.
+* Please Note That OhMyConsole, Is In No-Way Optimized For "High-Performance", Or Anything Like That, But It's still quite fast.
 * OhMyConsole Has Basic Functionality And Basic Customization Features - But Hey! It Works.
 
 ## USAGE:
@@ -12,27 +12,33 @@
 
 ```cpp
 
-#include "OhMyConsole/OhMyConsole.hpp"
-#include "OhMyConsole/OhMyConfiguration.hpp"
+#include "OhMyConsole/omc.h"
+
+omc_c* console = new omc_c();
+Timer* timer = new Timer();   // A small extra class for basic Timer utility functions, built into OMC. 
+
 
 int main()
 {
-    OhMyConfiguration* config = new OhMyConfiguration();
-    config->set_project_name("NOT REQUIRED BUT LOOKS GOOD");
-    config->set_colour_start_rotation(145); // this will make the color tags start at cyan. any number from 1-360 is valid. Anything Below / Higher Should Be Auto-Corrected.   ---> NOT REQUIRED.
-    config->enable_update_strftime_title() // If you ever use `console->NewConsoleTitle("%FTT") // For A Custom STRFTIME, The Time Will Update With Every `print` call.        ----> NOT REQURIED, OFF BY DEFAULT.
-    config->disable_update_strftime_title() // I mean, can you gues what this does?                                                                                            ----> NOT REQUIRED, THIS IS THE DEFAULT BOOLEAN STATE
-    
-    // config->get_abc123() is purely used for OhMyConsole, so it can set and use the values from the given configuration.
-    
-    OhMyConsole* console = new OhMyConsole(*config);  // I just love the look of console->abc123();
-    console->init()  // initialize values from config, and just get the library ready.
-    console->print_ok("This is a SUCCESS message and will be printed in Lime.");
-    console->print_info("This is an INFO message and will be printed in Cyan. ");
-    console->print_warn("This is a WARN message, and will be printed in Yellow. ");
-    console->print_error("This is an ERROR message, and will be printed in Red. ");
+    omcf_t config;
+    config.colour_rotation_offset  = 6;                  //  [int] Value to apply to each rotation
+    config.starting_rotation_value = 225;               //   [int] Starting value of the rotation [int]/360.
+    config.console_title           = "hello world!";    //   [str] Sets the console title.
 
-    console->NewConsoleTitle("%FTT %FSWA %FSR");   // FTT = Formatted-Time,  FSWA = Formatted-Smiley-Face-With-Arrow: ">:)",  FSR = Formatted-Smiley-Face-Regular: ":)". 
-}
+    console->create_dll_console();                     // only needed if you're inside of a DLL.
+    console->load_configuration(&config);              // this is NOT required, however if not called, it will use the default options.
 
+    console->info(...);
+    console->warn(...);
+    console->error(...);
+    console->success(...);
+
+    timer->start();
+    timer->stop();
+    timer->pause_for()         // this will pause the current thread for [int] ms.
+    timer->elapsed();          // returns the elapsed time, only if `end()` was called.
+    timer->elapsed_to_str()    // returns the elapsed time as a [string]
+    
+
+} 
 ```
